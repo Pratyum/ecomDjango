@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Blitzkrieg| Dashboard</title>
-  
+
   {% load static %}
   <!-- Bootstrap core CSS-->
   <link href="{% get_static_prefix %}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -18,6 +18,7 @@
   <link href="{% get_static_prefix %}/css/sb-admin.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="{% get_static_prefix %}/css/style.css" rel="stylesheet">
+  <link href="{% get_static_prefix %}/css/map.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -55,9 +56,13 @@
       <br/>
         <div class="card mb-3">
             <div class="card-header">Order Overview</div>
-            <a href="#">
+            <!-- <a href="#">
               <img class="card-img-top img-fluid w-100" src="{% get_static_prefix %}/images/map_screenshot.png" alt="">
-            </a>
+            </a> -->
+            <div class="col-12">
+                <div id="map"></div>
+            </div>
+
         </div>
       </div>
     </div>
@@ -96,9 +101,13 @@
     <!-- Core plugin JavaScript-->
     <script src="{% get_static_prefix %}/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxDUNnLRbtEHflMVMPtylD5I5sSFK6QVQ&callback=initialize">
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="{% get_static_prefix %}/vendor/chart.js/Chart.min.js"></script>
     <script src="{% get_static_prefix %}/vendor/datatables/jquery.dataTables.js"></script>
     <script src="{% get_static_prefix %}/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="{% get_static_prefix %}/js/map.js"></script>
   </div>
 </body>
 

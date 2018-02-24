@@ -48,10 +48,12 @@ class CollatedOrders(View):
     def dispatch(self, request, *args, **kwargs):
         return super(CollatedOrders, self).dispatch(request, *args, **kwargs)
 
-    def post(self, request):
-        orderids = json.loads(request.POST['orderids'])
+    def get(self, request):
+        data = json.loads(request.GET.get('data'))
+        orderids = data['orderids']
         origin_postal_code = '437934'
-        destination_postal_code = request.POST['destination_postal_code']
+        destination_postal_code = data['destination_postal_code']
+        print("destination_postal_codeddddd", destination_postal_code)
         # for oid in orderids:
         orders = Order.objects.filter(pk__in=orderids)
         items_arr = []

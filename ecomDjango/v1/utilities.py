@@ -64,6 +64,7 @@ def get_ratio_and_savings(ordered_items, origin_postal_code, destination_postal_
 
     #Making the api request for the collated items list
     r = requests.post("https://api-sandbox.easyship.com/rate/v1/rates", data=json.dumps(data_dict), headers=headers)
+    print("r texttttttt", r.text)
     collated_price_cheap = json.loads(r.text)["rates"][0]["shipment_charge_total"]
     collated_price_premium = json.loads(r.text)["rates"][-1]["shipment_charge_total"]
 
