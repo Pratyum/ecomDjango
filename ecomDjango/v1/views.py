@@ -78,6 +78,7 @@ class CollatedOrders(View):
             order.predictedShippingPrice = blitzkreig_prices_premium[idx]
             order.premiumShippingPrice = individual_prices_premium[idx]
             order.save()
+            
         return JsonResponse({"success":True, "blitzkreig_prices_premium": json.dumps(blitzkreig_prices_premium), "individual_prices_cheap": json.dumps(individual_prices_cheap), "individual_prices_premium": json.dumps(individual_prices_premium)})
 
 class SignUpView(View):
@@ -112,6 +113,15 @@ class SignInWebView(TemplateView):
 class SignUpWebView(TemplateView):
     template_name = "v1/signup.html"
 
+def send_email(message, toEmail, subject):
+        from_email="Admin Poolz <admin@dormbuddy.sg>"
+        text_content = message
+        html_content = "You have been Poolzed: <a href='https://127.0.0.1:8000/dashboard/'>"+message+"</a>"
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [toEmail])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        return JsonResponse({"success":True})
+
 class CreateOrderAndItemView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -141,6 +151,11 @@ class CreateOrderAndItemView(View):
         for item in itemsArr:
             order.items.add(item)      
         order.save()
+        send_email("Click Here","singhpriyanshu5@gmail.com","Your order has been poolzyed")
+        # send_email("Click Here","pratyum001@e.ntu.edu.sg","Your order has been poolzyed")
+        send_email("Click Here","shantanukamath@live.in","Your order has been poolzyed")
+        send_email("Click Here","gargutsav96@gmail.com","Your order has been poolzyed")
+        # send_email("Click Here","vinithrnair@gmail.com","Your order has been poolzyed") 
         print("Order Saved: %d"%(order.id))
         return JsonResponse({"success":True,"orderID":order.id})
 
