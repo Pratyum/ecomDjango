@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate,login
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView
+from django.core.mail import EmailMultiAlternatives
 # Create your views here.
 
 class GetOrders(View):
@@ -72,4 +73,55 @@ class SignInWebView(TemplateView):
 
 class SignUpWebView(TemplateView):
     template_name = "v1/signup.html"
+
+class CreateOrderAndItemView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CreateOrderAndItemView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request):
+        print(request.GET)
+        items = json.loads(request.GET.get('data'))
+        address = request.GET.get('address')
+        user = User.objects.get(pk=1)
+        totalPrice = 0
+        itemsArr = []
+        for item in items:
+            print("Item: %s"%(item))
+            price = float(item['price'])
+            dimensions = item['dimensions']
+            name = item['name']
+            weight = item['weight']
+            item = Item(name=name, price=price, dimensions=dimensions,weight=weight)
+            item.save()
+            itemsArr.append(item)
+            print("Item Added: %s" %(name))
+            totalPrice = totalPrice + price
+        order = Order(price=totalPrice,status="Incomplete",realShippingPrice=0.0,predictedShippingPrice=0.0,address=address) 
+        order.save()
+        order.userOrdered.add(user)     
+        for item in itemsArr:
+            order.items.add(item)      
+        order.save()
+        print("Order Saved: %d"%(order.id))
+        return JsonResponse({"success":True,"orderID":order.id})
+
+
+class SendEmailView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(SendEmailView, self).dispatch(request, *args, **kwargs)
+
+    def get(self,request):
+        message=request.GET.get('message')
+        to =request.GET.get('toEmail')
+        subject = request.GET.get('subject')
+        from_email="admin@dormbuddy.sg"
+        text_content = message
+        html_content = "<p>" + message + "<p>"
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        return JsonResponse({"success":True})
+
 

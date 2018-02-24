@@ -130,3 +130,12 @@ CORS_ORIGIN_ALLOW_ALL = True
 #     '127.0.0.1:9000',
 #     '154e1d21.ngrok.io'
 # )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'admin@dormbuddy.sg'
+EMAIL_HOST_PASSWORD = 'adminpassword'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL ="<Team Blitzkrieg>"

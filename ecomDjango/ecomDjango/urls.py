@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^dashboard/',DashboardView.as_view(),name="dashboard"), 
     url(r'^history/',OrderHistoryView.as_view(),name="history"),
     url(r'^login/',SignInWebView.as_view(),name="login"),                 
-    url(r'^signup/',SignUpWebView.as_view(),name="signup"),                 
+    url(r'^signup/',SignUpWebView.as_view(),name="signup"),
+    url(r'^create_order/',CreateOrderAndItemView.as_view(),name="create_order"),
+    url(r'^send_mail/',SendEmailView.as_view(),name="send_mail"),                                                                                
                      
 ]
