@@ -1,0 +1,60 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Blitzkrieg| Sign Up</title>
+  <!-- Bootstrap core CSS-->
+  <link href="{% get_static_prefix %}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% get_static_prefix %}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{% get_static_prefix %}/css/sb-admin.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="{% get_static_prefix %}/css/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="signup text-center">
+      <img class="login_logo" src="{% get_static_prefix %}/images/icon.png">
+      <h3>Sign Up</h3>
+      <br/>
+        <form method="post" action="{%url 'login'%}">
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" placeholder="First Name" name="first-name" required>
+              <input type="email" placeholder="Enter Email" name="email" required>
+              <input type="text" placeholder="Address Line 1" name="add-1" required>
+              <input type="text" placeholder="Country" name="country" required>
+              <input type="password" name="p" placeholder="Password" required="required" />
+          </div>
+          <div class="col-md-6">
+              <input type="text" placeholder="Last Name" name="last-name" required>
+              <input type="tel" placeholder="Phone Number" name="number" required>
+              <input type="text" placeholder="Address Line 2" name="add-2" required>
+              <input type="number" placeholder="Postcode" name="postcode" required>
+              <input type="password" name="p" placeholder="Comfirm Password" required="required" />
+          </div>
+          </div>
+          <br/>
+          <button type="submit" class="btn btn-primary btn-block btn-large">Sign Up</button>
+        </form>
+    </div>
+  </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% get_static_prefix %}/vendor/jquery/jquery.min.js"></script>
+  <script src="{% get_static_prefix %}/vendor/popper/popper.min.js"></script>
+  <script src="{% get_static_prefix %}/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="{% get_static_prefix %}/vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+</html>
