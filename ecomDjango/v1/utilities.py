@@ -6,7 +6,8 @@ headers = {
   'Authorization': 'Bearer sand_nQYG5uxLQWQrjyKchfc6+vQgPET/X1yUPoqxpe5Ed18='
 }
 
-google_api_key = "AIzaSyBChC6iDgmDJfEj0Ttdc7sQ0dfEFSj0RBk"
+# google_api_key = "AIzaSyBChC6iDgmDJfEj0Ttdc7sQ0dfEFSj0RBk"
+google_api_key = "AIzaSyCbL1Or8ZU_RdKETH__6dngGyyhgXKRRhA"
 def get_ratio_and_savings(ordered_items, origin_postal_code, destination_postal_code):
     #ordered_items is an array of dicts which have weight, height, width, length and price of the items
     #Get the individual prices for the ordered items from easyship api

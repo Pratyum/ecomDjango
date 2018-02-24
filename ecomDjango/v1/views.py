@@ -44,23 +44,33 @@ class AuthenticateView(View):
             return JsonResponse({"success":False,"fail-text":"Not a user"})
 
 class CollatedOrders(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CollatedOrders, self).dispatch(request, *args, **kwargs)
+
     def post(self, request):
         orderids = json.loads(request.POST['orderids'])
         origin_postal_code = '437934'
         destination_postal_code = request.POST['destination_postal_code']
         # for oid in orderids:
-        orders = Order.objects.filter(pk=orderids)
+        orders = Order.objects.filter(pk__in=orderids)
         items_arr = []
         for order in orders:
-            items = order.items
+            items = order.items.all()
+            print("items lengthsdafsdfasdfsadfsadfsadfasdfs", len(items))
             for item in items:
-                item_dict = {item.weight, item.height, item.width, item.length}
+                item_dimensions = item.dimensions.replace("mm", "")
+                print("item_dimensions", item_dimensions)
+                item_dimensions = item_dimensions.strip().split("x")
+                print("item_dimensions", item_dimensions)
+                item_dict = {"weight":float(item.weight), "height":float(item_dimensions[0])/10, "width":float(item_dimensions[1])/10, "length":float(item_dimensions[2])/10}
                 items_arr.append(item_dict)
                 print("items_arr[0]", items_arr[0])
-        blitzkreig_prices_premium, individual_prices_cheap, individual_prices_premium = get_ratio_and_savings(origin_postal_code, destination_postal_code, items_arr)
+        blitzkreig_prices_premium, individual_prices_cheap, individual_prices_premium = get_ratio_and_savings(items_arr, origin_postal_code, destination_postal_code)
         print("blitzkreig_prices_premium", blitzkreig_prices_premium)
         print("individual_prices_cheap", individual_prices_cheap)
         print("individual_prices_premium", individual_prices_premium)
+        return JsonResponse({"success":True, "blitzkreig_prices_premium": json.dumps(blitzkreig_prices_premium), "individual_prices_cheap": json.dumps(individual_prices_cheap), "individual_prices_premium": json.dumps(individual_prices_premium)})
 
 class SignUpView(View):
 
