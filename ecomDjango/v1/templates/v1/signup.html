@@ -1,3 +1,5 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,22 +11,22 @@
   <meta name="author" content="">
   <title>Blitzkrieg| Sign Up</title>
   <!-- Bootstrap core CSS-->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% get_static_prefix %}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
-  <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="{% get_static_prefix %}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
-  <link href="../css/sb-admin.css" rel="stylesheet">
+  <link href="{% get_static_prefix %}/css/sb-admin.css" rel="stylesheet">
   <!-- Custom styles for this template-->
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="{% get_static_prefix %}/css/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-dark">
   <div class="container">
     <div class="signup text-center">
-      <img class="login_logo" src="../images/icon.png">
+      <img class="login_logo" src="{% get_static_prefix %}/images/icon.png">
       <h3>Sign Up</h3>
       <br/>
-        <form method="post" action="../index.html">
+        <form method="post" action="{%url 'login'%}">
           <div class="row">
             <div class="col-md-6">
               <input type="text" placeholder="First Name" name="first-name" required>
@@ -48,11 +50,11 @@
   </div>
   </div>
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/popper/popper.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{% get_static_prefix %}/vendor/jquery/jquery.min.js"></script>
+  <script src="{% get_static_prefix %}/vendor/popper/popper.min.js"></script>
+  <script src="{% get_static_prefix %}/vendor/bootstrap/js/bootstrap.min.js"></script>
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="{% get_static_prefix %}/vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
 
 </html>

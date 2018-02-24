@@ -20,8 +20,11 @@ from v1.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$', auth_views.login, 
-        {'template_name': 'v1/registration/login.html'}, name='login'),
     url(r'^get_orders/',GetOrders.as_view()),
-    url(r'^login/',AuthenticateView.as_view()),    
+    url(r'^accounts/login/',AuthenticateView.as_view()),
+    url(r'^dashboard/',DashboardView.as_view(),name="dashboard"), 
+    url(r'^history/',OrderHistoryView.as_view(),name="history"),
+    url(r'^login/',SignInWebView.as_view(),name="login"),                 
+    url(r'^signup/',SignUpWebView.as_view(),name="signup"),                 
+                     
 ]
